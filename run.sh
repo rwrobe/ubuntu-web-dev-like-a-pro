@@ -27,7 +27,7 @@ case "$1" in
             sudo apt update -y
             sudo apt install ansible -y
             echo "Install GIT"
-            sudo apt-get install git -y
+            sudo apt install git -y
             echo "Clone ubuntu-web-dev-like-a-pro"
             git clone https://github.com/rwrobe/zorin-webdev-starter-kit ~/zorin-webdev-starter-kit
             sudo echo "[local]" >> /etc/ansible/hosts
