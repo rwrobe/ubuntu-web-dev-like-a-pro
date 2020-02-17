@@ -23,9 +23,9 @@
   sudo: yes
 
 - name: Install prerequisites
-    apt:
-      name: ['python3-pip', 'python3-setuptools', 'virtualenv']
-      update_cache: yes
+  apt:
+    name: ['python3-pip', 'python3-setuptools', 'virtualenv']
+    update_cache: yes
 
 - name: Install docker-compose
   pip:

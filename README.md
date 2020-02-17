@@ -52,6 +52,8 @@ Check and customize scripts before running installation.
 - [x] Docker Compose
 - [x] Kubernetes (kubectl, kubectx, kubens)
 - [x] CA Certificates
+- [ ] Postman
+- [ ] Dock Station
 
 ### System essentials
 
