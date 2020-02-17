@@ -1,5 +1,5 @@
 ---
-- name: ensure system packages are installed
+- name: Ensure system packages are installed
   apt: pkg="{{ item }}" state=latest
   with_items:
     - ubuntu-restricted-extras
@@ -18,7 +18,7 @@
     - gcc
     - openssl
     - dconf-tools
-    - python-software-properties
+    - software-properties-common
     - python-apt
     - python-mysqldb
     - python-psycopg2

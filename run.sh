@@ -1,6 +1,6 @@
 #!/bin/bash
 FOLDER="$HOME/zorin-webdev-starter-kit"
-ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass -u $USER"
+ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass -u $USER --verbose"
 
 provistext="
 ======================================================================

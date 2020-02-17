@@ -18,6 +18,3 @@
 
 - name: Install Docker CE
   include: docker.yml
-
-- name: Install Docker Compose
-  include: compose.yml
