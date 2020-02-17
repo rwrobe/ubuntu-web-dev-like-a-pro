@@ -11,7 +11,8 @@ This fork of [Ubuntu Webdev like a Pro](https://github.com/iJackUA/ubuntu-web-de
 
 * `curl -s https://raw.githubusercontent.com/iJackUA/ubuntu-web-dev-like-a-pro/master/run.sh | bash /dev/stdin prepare`
 * **Check the `main.yml` file to see what will be installed. Check/modify version numbers and included roles**
-* `ansible-playbook ~/ubuntu-web-dev-like-a-pro/main.yml --ask-sudo-pass`
+* Install openssh server: `sudo apt-get install openssh-client openssh-server`
+* `sudo ansible-playbook ~/ubuntu-web-dev-like-a-pro/main.yml --ask-sudo-pass`
 
 ## Notice! Nothing is guaranteed! Use it on your own risk! 
 

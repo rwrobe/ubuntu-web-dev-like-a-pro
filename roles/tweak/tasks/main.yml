@@ -26,11 +26,11 @@
   sudo: yes
 
 - name: Set Gtk Theme
-  shell: sudo -iu {{ ansible_ssh_user }} gsettings set org.gnome.desktop.interface gtk-theme "Zukitwo"
+  shell: sudo -iu {{ ansible_user }} gsettings set org.gnome.desktop.interface gtk-theme "Zukitwo"
 
 - name: Set Icon Theme
-  shell: sudo -iu {{ ansible_ssh_user }} gsettings set org.gnome.desktop.interface icon-theme "Faenza-Dark"
+  shell: sudo -iu {{ ansible_user }} gsettings set org.gnome.desktop.interface icon-theme "Faenza-Dark"
 
 - name: Set Window Theme
-  shell: sudo -iu {{ ansible_ssh_user }} gsettings set org.gnome.desktop.wm.preferences theme "Zukitwo"
+  shell: sudo -iu {{ ansible_user }} gsettings set org.gnome.desktop.wm.preferences theme "Zukitwo"
 

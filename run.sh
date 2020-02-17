@@ -1,6 +1,6 @@
 #!/bin/bash
-FOLDER="~/zorin-webdev-starter-kit"
-ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass"
+FOLDER="$HOME/zorin-webdev-starter-kit"
+ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass -u $USER"
 
 provistext="
 ======================================================================
@@ -24,9 +24,8 @@ echo $warningtext
 case "$1" in
         prepare)
             echo "Install Ansbile"
-            sudo add-apt-repository ppa:rquillo/ansible
-            sudo apt-get update -y
-            sudo apt-get install ansible -y
+            sudo apt update -y
+            sudo apt install ansible -y
             echo "Install GIT"
             sudo apt-get install git -y
             echo "Clone ubuntu-web-dev-like-a-pro"
@@ -44,6 +43,8 @@ case "$1" in
 
         install)
             echo "Starting Ansible provisioning"
+            sudo echo "[local]" >> /etc/ansible/hosts
+            sudo echo "127.0.0.1 ansible_user=$USER" >> /etc/ansible/hosts
             $ANSIBLE_COMMAND
             ;;
 

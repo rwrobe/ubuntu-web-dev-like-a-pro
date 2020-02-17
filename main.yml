@@ -3,9 +3,9 @@
   hosts: local
   connection: local
   vars:
-    hostname: localhost
-    downloadDir: /home/{{ ansible_ssh_user }}/Download/Zorin-Webdev-Starter-Pack
-    installDir: /home/{{ ansible_ssh_user }}/Apps
+    hostname: local
+    downloadDir: /home/{{ ansible_user }}/Download/Zorin-Webdev-Starter-Pack
+    installDir: /home/{{ ansible_user }}/Apps
     downloadThreads: 20
 
   roles:
