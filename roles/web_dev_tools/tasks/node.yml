@@ -1,0 +1,23 @@
+---
+- name: Install NVM and Node Latest
+  shell: |
+    axel -n {{ downloadThreads }} "https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh" -o install.sh chdir={{ downloadDir }} creates=install.sh
+    bash {{ downloadDir }}/install.sh
+    echo "export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm" >> ~/.zshrc
+    nvm install latest
+
+- name: Install Task Runners
+  shell: "npm install -g {{ item }}"
+  with_items:
+    - grunt-cli
+    - gulp
+    - webpack
+
+- name: Install Yarn
+  shell: |
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    apt-get update
+    apt-get install --no-install-recommends yarn
+  sudo: yes

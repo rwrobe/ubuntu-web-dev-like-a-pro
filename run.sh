@@ -1,5 +1,5 @@
 #!/bin/bash
-FOLDER="~/ubuntu-web-dev-like-a-pro"
+FOLDER="~/zorin-webdev-starter-kit"
 ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass"
 
 provistext="
@@ -30,7 +30,7 @@ case "$1" in
             echo "Install GIT"
             sudo apt-get install git -y
             echo "Clone ubuntu-web-dev-like-a-pro"
-            git clone https://github.com/iJackUA/ubuntu-web-dev-like-a-pro ~/ubuntu-web-dev-like-a-pro
+            git clone https://github.com/rwrobe/zorin-webdev-starter-kit ~/zorin-webdev-starter-kit
             echo "DONE! All required soft is preinstalled"
             echo "$provistext"
             ;;

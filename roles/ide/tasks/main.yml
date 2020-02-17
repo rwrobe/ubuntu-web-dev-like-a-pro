@@ -1,49 +1,60 @@
 ---
-- name: add PPA repos
-  apt_repository: repo="{{ item }}" update_cache=yes
-  with_items:
-    - ppa:webupd8team/atom
-    - ppa:webupd8team/sublime-text-3
-  sudo: yes
 
-- name: Update caches after PPA being added
-  apt: update_cache=yes
-  sudo: yes
+- name: Check if JetBrains Toolbox is already installed
+  stat:
+    path: ~/.local/share/JetBrains/Toolbox
+  register: st_jetbrains_toolbox
 
-- name : install IDEs from PPAs
-  apt: name="{{ item }}" state=present
-  with_items:
-    - atom
-    - sublime-text-installer
-  sudo: yes
+- block:
+    - name: Get available releases
+      uri:
+        url: https://data.services.jetbrains.com/products/releases?code=TBA&type=release
+        method: GET
+      register: jetbrains_toolbox_available_releases
 
+    - name: Get versions
+      set_fact:
+        jetbrains_toolbox_versions: "{{ jetbrains_toolbox_available_releases.json.TBA | map(attribute='version') | list }}"
 
-- name: Download PhpStorm
-  shell: axel -n {{ downloadThreads }} http://download.jetbrains.com/webide/PhpStorm-{{ vPhpStorm }}.tar.gz chdir={{ downloadDir }} creates=PhpStorm-{{ vPhpStorm }}.tar.gz
+    - name: Update version fact if latest is overridden
+      set_fact:
+        jetbrains_toolbox_version: "{{ jetbrains_toolbox_available_releases.json.TBA | sort(attribute='build', reverse=True) | map(attribute='version') | list | first }}"
+      when: jetbrains_toolbox_version == 'latest'
 
-- name: Install PhpStorm
-  shell: mkdir -p {{ installDir }}/PhpStorm-{{ vPhpStorm }} && tar -xf {{ downloadDir }}/PhpStorm-{{ vPhpStorm }}.tar.gz -C {{ installDir }}/PhpStorm-{{ vPhpStorm }} --strip-components=1 creates={{ installDir }}/PhpStorm-{{ vPhpStorm }}
+    - name: Check if version is valid
+      assert:
+        that: (jetbrains_toolbox_version | string) in jetbrains_toolbox_versions
+        msg: "The value of jetbrains_toolbox_version ({{ jetbrains_toolbox_version }}) is invalid. Available options are {{ jetbrains_toolbox_versions | join(', ') }}"
 
+    - name: Create temporary download directory
+      tempfile:
+        state: directory
+        suffix: ".jetbrains_toolbox_download"
+      register: jetbrains_toolbox_download_dir
+      changed_when: no
 
+    - name: Download JetBrains Toolbox
+      get_url:
+        url: "{{ jetbrains_toolbox_available_releases.json | json_query(jetbrains_toolbox_download_query) | first }}"
+        dest: "{{ jetbrains_toolbox_download_dir.path }}/jetbrains_toolbox.tar.gz"
+        checksum: "sha256:{{ lookup('url', jetbrains_toolbox_available_releases.json | json_query(jetbrains_toolbox_checksum_link) | first) | regex_search('[A-Fa-f0-9]{64}') }}"
+      vars:
+        jetbrains_toolbox_download_query: "TBA[?version == '{{ jetbrains_toolbox_version }}'].downloads.linux.link"
+        jetbrains_toolbox_checksum_link: "TBA[?version == '{{ jetbrains_toolbox_version }}'].downloads.linux.checksumLink"
 
-- name: Download PyCharm
-  shell: axel -n {{ downloadThreads }} http://download.jetbrains.com/python/pycharm-community-{{ vPyCharm }}.tar.gz chdir={{ downloadDir }} creates=pycharm-community-{{ vPyCharm }}.tar.gz
+    - name: Unpack install archive
+      unarchive:
+        src: "{{ jetbrains_toolbox_download_dir.path }}/jetbrains_toolbox.tar.gz"
+        dest: "{{ jetbrains_toolbox_download_dir.path }}"
+        list_files: yes
+      register: jetbrains_toolbox_unarchive
 
-- name: Install PyCharm
-  shell: mkdir -p {{ installDir }}/pycharm-community-{{ vPyCharm }} && tar -xf {{ downloadDir }}/pycharm-community-{{ vPyCharm }}.tar.gz -C {{ installDir }}/pycharm-community-{{ vPyCharm }} --strip-components=1 creates={{ installDir }}/pycharm-community-{{ vPyCharm }}
-
-
-
-- name: Download RubyMine
-  shell: axel -n {{ downloadThreads }} http://download.jetbrains.com/ruby/RubyMine-{{ vRubyMine }}.tar.gz chdir={{ downloadDir }} creates=RubyMine-{{ vRubyMine }}.tar.gz
-
-- name: Install RubyMine
-  shell: mkdir -p {{ installDir }}/RubyMine-{{ vRubyMine }} && tar -xf {{ downloadDir }}/RubyMine-{{ vRubyMine }}.tar.gz -C {{ installDir }}/RubyMine-{{ vRubyMine }} --strip-components=1 creates={{ installDir }}/RubyMine-{{ vRubyMine }}
-
-
-- name: Download Brakets
-  shell: aria2c -c -x 10 -s {{ downloadThreads }} https://github.com/adobe/brackets/releases/download/release-1.1/Brackets.Release.1.1.64-bit.deb chdir={{ downloadDir }} creates=Brackets.Release.1.1.64-bit.deb
-
-- name: Install Brakets
-  apt: deb={{ downloadDir }}/Brackets.Release.1.1.64-bit.deb
-  sudo: yes
+    - name: Install JetBrains Toolbox
+      command: "{{ jetbrains_toolbox_download_dir.path }}/{{ jetbrains_toolbox_unarchive.files | first }}/jetbrains-toolbox --install"
+  when: st_jetbrains_toolbox.stat.exists == False
+  always:
+    - name: Delete temporary download directory
+      file:
+        path: "{{ jetbrains_toolbox_download_dir.path }}"
+        state: absent
+      changed_when: no

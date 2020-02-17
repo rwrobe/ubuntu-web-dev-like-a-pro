@@ -1,12 +1,11 @@
-Ubuntu Web Dev Like a Pro
+Zorin Webdev Starter Kit
 =========================
 
-Ansible playbook for a quick and effortless installation of all essential and often used software for a web development (mostrly for PHP and Ruby dev).
-Clean and easy to customize for your needs.
+This fork of [Ubuntu Webdev like a Pro](https://github.com/iJackUA/ubuntu-web-dev-like-a-pro) is meant to get an Ubuntu-based distro started quickly with PHP and Python development. Also includes some of the productivity and theme tools I like most.
 
 ## Supported OS:
 
-* Ubuntu 14.04+ based x86_64 (64bit) OS only !
+* Zorin 15.1 based x86_64 (64bit), but will likely work on other Ubuntu-based distros using apt package manager. Use at your own risk.
 
 ## Quick start
 
@@ -16,111 +15,65 @@ Clean and easy to customize for your needs.
 
 ## Notice! Nothing is guaranteed! Use it on your own risk! 
 
-Check and customize scripts before running installation. In case of errors in script it could damage your OS (but I tried to use as unobtrusive and as safe installation ways as possible).
-
+Check and customize scripts before running installation. 
 
 ## What`s inside :
 
 ### IDE
 
-- [x] PhpStorm
-- [x] PyCharm 
-- [x] RubyMine (very easy to add any other JetBrains IDE by example)
-- [x] Atom
-- [x] Brakets
-- [x] Sublime Text 3
-
+- [x] JetBrains Toolbox (easy installation and version management)
 
 ### Browsers
 
 - [x] Chrome
 - [x] Chromium
-- [x] Firefox
-- [x] Opera
 
 ### WebDev essentials
 
-- [x] LAMP (Apache2, PHP 5.6, MySQL 5.6)
 - [x] Composer
-- [x] Adminer
-- [x] Node.JS
+- [x] Xdebug
+- [x] PHP@7.3
+- [x] Python 3
 - [x] Ruby (rbenv, rbenv-build, Ruby 2.0.*) 
-- [x] SASS / LESS compilers
+- [x] Node (nvm)
+- [x] Yarn
+- [x] Grunt
+- [x] Gulp
+- [x] Webpack
+
+### Deployment CLIs
+
+- [x] Azure CLI
+- [x] ElasticBeanstalk CLI
 
 ### WebDev Tools
 
-- [x] Virtualbox
-- [x] Vagrant
-- [x] MySQL Workbench
-- [x] 0xDBE
-- [x] RoboMongo
-- [x] Meld diff rool
-- [x] Wireshark
-- [x] Gcolor2
-- [x] GitEye
+- [x] Docker CE
+- [x] Docker Compose
+- [x] Kubernetes (kubectl, kubectx, kubens)
+- [x] CA Certificates
 
 ### System essentials
 
-- [x] Restricted extras
-- [x] Nvidia drivers
-- [x] Java 7
-- [x] Gdebi
-- [x] Wine
-- [x] Synapse
-- [x] Disks
-- [x] git
-- [x] htop
-- [x] dconf-tools
-- [x] Terminator
-- [x] Terra
 - [x] ZSH
 - [x] Oh-my-ZSH
 
 ### System general usage
 
 - [x] LibreOffice
-- [x] Skype
-- [x] Thunderbird
-- [x] Dropbox
-- [x] Deluge
-- [x] TeamViewer
-- [x] Filezilla
-- [x] KeepassX
-
-### Trackers
-
-- [x] Elance (Adobe Air)
-- [x] oDesk
-
-### Media
-
-#### Video
-
-- [x] VLC
-- [x] HandBrake
+- [x] Mailspring
+- [x] Minetime (Calendar)
+- [x] Franz
+- [x] Slack
+- [x] InSync
 
 #### Audio
 
-- [x] Clementine
-- [x] Deadbeef
-
-#### Recorders
-
-- [x] Audiorecorder
-- [x] SimpleScreenRecorder
-- [x] Vokoscreen
-- [x] Shutter
-
-#### Viewers/Readers
-
-- [x] CoolReader
-- [x] gthumb
+- [x] Spotify
 
 ### Tweaks
 
-- [x] Ubuntu Tweak
 - [x] gnome-tweak-tool
-- [x] Faenza/Faience Icons
-- [x] Themes - Zukitwo
-- [x] Fonts - Ubuntu, Input, Inconsolata, Droid
+- [x] Numix Icons
+- [x] Fonts - Powerline fonts
 - [x] Auto-preset custom theme, font, icons
