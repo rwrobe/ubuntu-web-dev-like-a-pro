@@ -1,5 +1,5 @@
 ---
-- name: Ensure PHP 7.3 repository
+- name: Ensure Ondrej PHP repo added
   apt_repository: repo='ppa:ondrej/php' state=present update_cache=yes
   sudo: yes
 
