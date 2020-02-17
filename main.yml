@@ -7,8 +7,6 @@
     downloadDir: /home/{{ ansible_user }}/Download/Zorin-Webdev-Starter-Pack
     installDir: /home/{{ ansible_user }}/Apps
     downloadThreads: 10
-  set_fact:
-    ansible_distribution: 'Ubuntu' # Override for ZorinOS, for Docker, etc.
 
   roles:
       - initial
