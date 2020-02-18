@@ -9,9 +9,11 @@
 
 - name: Fix home folder permissions
   file:
-    path: ~
-    owner: {{ ansible_user }}
-    group: {{ ansible_user }}
+    path: ~/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+    recurse: yes
   become: yes
 
 - name: Install Node latest
