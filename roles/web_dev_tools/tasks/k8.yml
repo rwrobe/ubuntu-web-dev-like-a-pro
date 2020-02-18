@@ -5,7 +5,7 @@
     curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
     chmod +x ./kubectl
     mv ./kubectl /usr/local/bin/kubectl
-  sudo: yes
+  become: yes
 
 - name: Install kubectx, kubens and bash completions
   shell: |
@@ -19,4 +19,4 @@
     chmod -R 755 ~/.oh-my-zsh/completions
     ln -s /opt/kubectx/completion/kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
     ln -s /opt/kubectx/completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
-  sudo: yes
+  become: yes
