@@ -8,11 +8,16 @@
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion ' >> ~/.zshrc
 
 - name: Fix home folder permissions
-  shell: chown -R {{ ansible_user }}:{{ ansible_user }} ~
+  file:
+    path: ~
+    owner: {{ ansible_user }}
+    group: {{ ansible_user }}
   become: yes
 
-- name: Install node latest
-  shell: nvm install stable
+- name: Install Node latest
+  shell: |
+    source ~/.zshrc
+    nvm install stable
 
 - name: Install Task Runners
   shell: "npm install -g {{ item }}"
