@@ -1,8 +1,0 @@
----
-# Todo: Postman, Dock Station
-
-- include: composer.yml
-
-- include: node.yml
-
-- include: k8.yml

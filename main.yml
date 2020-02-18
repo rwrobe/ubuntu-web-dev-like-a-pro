@@ -10,11 +10,10 @@
 
   roles:
       - initial
-      - system_essential
+      - essential_packages
       - ide
       - browser
-      - system_general
-      - web_dev_essential
-      - web_dev_tools
+      - productivity
+      - dev_tools
       - media
       - theme

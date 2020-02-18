@@ -11,10 +11,14 @@
 
 - name: Make Composer executable
   shell: chmod +x /usr/local/bin/composer
-  sudo: yes
+  become: yes
 
-- name: Install Ruby
-  include: ruby.yml
+- include: docker.yml
 
-- name: Install Docker CE
-  include: docker.yml
+- include: composer.yml
+
+- include: node.yml
+
+- include: k8.yml
+
+# Todo: Postman, Dock Station
