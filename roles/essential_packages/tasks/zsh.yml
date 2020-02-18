@@ -19,3 +19,7 @@
 - name: Change default shell for user
   shell: chsh {{ ansible_user }} -s $(which zsh)
   ignore_errors: yes
+
+- name: Change default shell for root
+  shell: chsh root -s $(which zsh)
+  ignore_errors: yes
