@@ -1,0 +1,3 @@
+---
+docker_distribution_string: "Ubuntu"
+docker_distribution_release: "Bionic"

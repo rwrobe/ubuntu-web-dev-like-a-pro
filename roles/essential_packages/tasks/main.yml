@@ -1,0 +1,48 @@
+---
+- name: Ensure system packages are installed
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - ubuntu-restricted-extras
+    - ubuntu-restricted-addons
+    - build-essential
+    - git
+    - curl
+    - wget
+    - bash-completion
+    - axel
+    - aria2
+    - htop
+    - mc
+    - libpq-dev
+    - build-essential
+    - gcc
+    - openssl
+    - dconf-tools
+    - software-properties-common
+    - python-apt
+    - python-mysqldb
+    - python-psycopg2
+    - ca-certificates
+    - libsecret-1-dev
+    - net-tools
+    - libnss3-tools
+    - snapd
+    - virtualbox
+    - zsh
+    - zlib1g-dev
+    - libssl-dev
+    - libncurses-dev
+    - libffi-dev
+    - libsqlite3-dev
+    - libreadline-dev
+    - libbz2-dev
+    - apt-transport-https
+    - lsb-release
+    - gnupg
+  sudo: yes
+
+- name: Update caches after PPA being added
+  apt: update_cache=yes
+  sudo: yes
+
+- include: zsh.yml

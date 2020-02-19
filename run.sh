@@ -1,14 +1,14 @@
 #!/bin/bash
-FOLDER="~/zorin-webdev-starter-kit"
+FOLDER="$HOME/zorin-webdev-starter-kit"
 ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass"
 
 provistext="
 ======================================================================
-Customize playbooks and run provisioning with the following command :
-$> $FOLDER/run.sh install  [DO NOT WORK AT THE MOMENT. USE MANUAL METHOD BELOW]
-or (if you are a cool one ;)) directly execure Ansible playbook
-$> $ANSIBLE_COMMAND
-Warning! If you run 'ansible-playbook' manually. Run it from the user you want to provision. NOT as sudo, script will ask sudo pass when needed !
+Update the playbooks as you see fit, and run the following commands:
+$> $FOLDER/run.sh prepare $USER # Install ansible and git; Setup the ansible hosts file for local connections using your shell user.
+$> $FOLDER/run.sh install # Where the magic happens.
+$> $ANSIBLE_COMMAND # If you prefer to run this using Ansible.
+Warning! If you run 'ansible-playbook' manually. Run it from the user you want to provision. NOT as sudo, script will ask sudo pass when needed!
 ======================================================================"
 
 warningtext="
@@ -24,13 +24,14 @@ echo $warningtext
 case "$1" in
         prepare)
             echo "Install Ansbile"
-            sudo add-apt-repository ppa:rquillo/ansible
-            sudo apt-get update -y
-            sudo apt-get install ansible -y
+            sudo apt update -y
+            sudo apt install ansible -y
             echo "Install GIT"
-            sudo apt-get install git -y
+            sudo apt install git -y
             echo "Clone ubuntu-web-dev-like-a-pro"
             git clone https://github.com/rwrobe/zorin-webdev-starter-kit ~/zorin-webdev-starter-kit
+            sudo echo "[local]" >> /etc/ansible/hosts
+            sudo echo "127.0.0.1 ansible_user=$2" >> /etc/ansible/hosts
             echo "DONE! All required soft is preinstalled"
             echo "$provistext"
             ;;

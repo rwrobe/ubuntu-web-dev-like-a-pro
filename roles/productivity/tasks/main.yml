@@ -1,0 +1,14 @@
+---
+- name: ensure system general packages are installed
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - libreoffice
+    - libreoffice-writer
+    - libreoffice-calc
+  sudo: yes
+
+- name: Install InSync
+  shell: |
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
+    echo "deb http://apt.insync.io/ubuntu bionic non-free contrib" > /etc/apt/sources.list.d/insync.list
+    apt update && apt install insync

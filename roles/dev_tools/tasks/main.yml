@@ -1,0 +1,30 @@
+---
+- name: Install PHP
+  include: php.yml
+
+- name: Download Composer
+  get_url:
+    url: https://getcomposer.org/installer
+    path: {{ downloadDir }}
+
+- name: Move Composer to /usr/local/bin
+  shell: creates="/usr/local/bin/composer" mv {{ downloadDir }}/composer.phar /usr/local/bin/composer
+  sudo: yes
+
+- name: Make Composer executable
+  shell: chmod +x /usr/local/bin/composer
+  become: yes
+
+- include: docker.yml
+
+- include: composer.yml
+
+- include: node.yml
+
+- include: k8.yml
+
+- include: azure.yml
+
+- include: eb.yml
+
+# Todo: Postman, Dock Station

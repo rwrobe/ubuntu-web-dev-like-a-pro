@@ -1,21 +1,19 @@
 ---
-- name: Ubuntu Web Dev Machine
-  hosts: 127.0.0.1
+- name: Zorin-Webdev-Starter-Pack
+  hosts: local
   connection: local
   vars:
-    hostname: localhost
-    downloadDir: /home/{{ ansible_ssh_user }}/Download/Downloads-Ubuntu-Like-A-Pro
-    installDir: /home/{{ ansible_ssh_user }}/Apps
-    downloadThreads: 20
+    hostname: local
+    downloadDir: /home/{{ ansible_user }}/Download/Zorin-Webdev-Starter-Pack
+    installDir: /home/{{ ansible_user }}/Apps
+    downloadThreads: 10
 
   roles:
       - initial
-      - system_essential
-# Order of "initial" and "system_essentials" roles is important ! Keep it at the top.
+      - essential_packages
       - ide
       - browser
-      - system_general
-      - web_dev_essential
-      - web_dev_tools
+      - productivity
+      - dev_tools
       - media
-      - tweak
+      - theme
