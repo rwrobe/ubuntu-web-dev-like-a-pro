@@ -1,0 +1,6 @@
+---
+- name: Clone ElasticBeanstalk Setup Script
+  git: repo="https://github.com/aws/aws-elastic-beanstalk-cli-setup.git" dest={{ downloadDir }}
+
+- name: Install EB
+  shell:  {{ downloadDir }}/aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
