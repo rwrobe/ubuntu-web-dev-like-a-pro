@@ -5,7 +5,7 @@
     dest: "{{ downloadDir }}"
 
 - name: Install Chrome
-  shell: dpkg -i google-chrome-stable_current_amd64.deb
+  shell: dpkg -i {{ downloadDir }}/google-chrome-stable_current_amd64.deb
   become: yes
 
 - name: Install Chromium Stable

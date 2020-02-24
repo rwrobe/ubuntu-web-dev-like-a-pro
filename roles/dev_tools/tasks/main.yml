@@ -1,19 +1,5 @@
 ---
-- name: Install PHP
-  include: php.yml
-
-- name: Download Composer
-  get_url:
-    url: https://getcomposer.org/installer
-    dest: "{{ downloadDir }}"
-
-- name: Move Composer to /usr/local/bin
-  shell: creates="/usr/local/bin/composer" mv {{ downloadDir }}/composer.phar /usr/local/bin/composer
-  become: yes
-
-- name: Make Composer executable
-  shell: chmod +x /usr/local/bin/composer
-  become: yes
+- include: php.yml
 
 - include: docker.yml
 

@@ -16,3 +16,8 @@
     - php-xdebug
     - mysql-client
   become: yes
+
+- name: Set php_executable variable to a default if not defined.
+  set_fact:
+    php_executable: php
+  when: php_executable is not defined
