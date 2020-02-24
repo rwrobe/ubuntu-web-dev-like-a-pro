@@ -5,7 +5,7 @@
 - name: Download Composer
   get_url:
     url: https://getcomposer.org/installer
-    path: {{ downloadDir }}
+    path: "{{ downloadDir }}"
 
 - name: Move Composer to /usr/local/bin
   shell: creates="/usr/local/bin/composer" mv {{ downloadDir }}/composer.phar /usr/local/bin/composer

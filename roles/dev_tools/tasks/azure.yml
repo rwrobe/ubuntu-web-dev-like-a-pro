@@ -2,7 +2,7 @@
 - name: Get Azure installer
   get_url:
     url: https://aka.ms/InstallAzureCLIDeb
-    path: {{ downloadDir }}
+    path: "{{ downloadDir }}"
 
 - name: Run Azure setup script
   shell: bash {{ downloadDir }}/InstallAzureCLIDeb
