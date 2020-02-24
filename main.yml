@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   vars:
-    downloadDir: /home/{{ ansible_user }}/Download/Zorin-Webdev-Starter-Pack
+    downloadDir: /home/{{ ansible_user }}/Downloads/Zorin-Webdev-Starter-Pack
     installDir: /home/{{ ansible_user }}/Apps
     downloadThreads: 10 # For axel, and mostly for large downloads like Chrome.
     githubOauthToken:

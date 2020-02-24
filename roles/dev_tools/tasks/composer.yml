@@ -14,15 +14,13 @@
 - name: Download Composer
   get_url:
     url: https://getcomposer.org/installer
-    dest: "{{ downloadDir }}"
+    dest: "{{ downloadDir }}/composer-setup.php"
     mode: a+x
     checksum: "sha384:{{ composer_installer_signature.content }}"
   when: not composer_bin
 
 - name: Run Composer installer.
-  shell: |
-    {{ php_executable }} composer-installer.php {% if composer_version %} --version={{ composer_version }}{% endif %}
-    chdir={{ downloadDir }}
+  shell: php {{downloadDir}}/composer-setup.php
   when: not composer_bin
 
 - name: Move Composer to /usr/local/bin
@@ -31,9 +29,7 @@
   when: not composer_bin
 
 - name: Update Composer to Latest Version
-  command: >
-    {{ php_executable }} {{ composer_path }} self-update
-  register: composer_update
+  shell: /usr/local/bin/composer
 
 - name: Add GitHub OAuth Token for Composer (if configured)
   become: true
