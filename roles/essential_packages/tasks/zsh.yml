@@ -14,15 +14,11 @@
     dest: "{{ downloadDir }}"
 
 - name: Install Oh-My-ZSH
-  shell: sh -c {{ downloadDir }}/install.sh
-  become: yes
+  shell: |
+    chmod +x {{ downloadDir }}/install.sh
+    sh -c {{ downloadDir }}/install.sh
   when: stat_result.stat.exists == False
-
-- name: Change theme for user
-  replace:
-    path: /home/{{ ansible_user }}/.zshrc
-    regexp: '^ZSH_THEME="robbyrussell"'
-    replace: '^ZSH_THEME="agnoster"'
+  become: yes
 
 - name: Change default shell for user
   shell: chsh {{ ansible_user }} -s $(which zsh)
@@ -30,3 +26,10 @@
 - name: Change default shell for root
   shell: chsh root -s $(which zsh)
   become: yes
+
+- name: Change theme for user
+  replace:
+    path: /home/{{ ansible_user }}/.zshrc
+    regexp: '^ZSH_THEME="robbyrussell"'
+    replace: '^ZSH_THEME="agnoster"'
+
