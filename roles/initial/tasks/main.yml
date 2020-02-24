@@ -1,8 +1,4 @@
 ---
-- name: set hostname
-  shell: hostname {{ hostname }}
-  sudo: yes
-
 - name: update APT cache
   apt: update_cache=yes
   sudo: yes

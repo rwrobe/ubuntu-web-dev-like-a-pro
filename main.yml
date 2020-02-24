@@ -1,9 +1,8 @@
 ---
 - name: Zorin-Webdev-Starter-Pack
-  hosts: local
+  hosts: localhost
   connection: local
   vars:
-    hostname: local
     downloadDir: /home/{{ ansible_user }}/Download/Zorin-Webdev-Starter-Pack
     installDir: /home/{{ ansible_user }}/Apps
     downloadThreads: 10 # For axel, and mostly for large downloads like Chrome.
