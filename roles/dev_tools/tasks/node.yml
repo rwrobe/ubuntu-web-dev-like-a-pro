@@ -1,20 +1,17 @@
 ---
+- name: Download NVM
+  get_url:
+    url: https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh
+    path: {{ downloadDir }}
 
-- name: Install NVM and Node Latest
+- name: Install NVM
+  shell: sh {{ downloadDir }}/install.sh
+
+- name: Add to PATH
   shell: |
-    curl -sS "https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh" | bash install.sh
     echo 'export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion ' >> ~/.zshrc
-
-- name: Fix home folder permissions
-  file:
-    path: ~/
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    state: directory
-    recurse: yes
-  become: yes
 
 - name: Install Node latest
   shell: |

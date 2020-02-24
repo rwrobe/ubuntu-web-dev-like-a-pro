@@ -1,8 +1,11 @@
 ---
+- name: Download Chrome Latest
+  get_url:
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    path: {{ downloadDir }}
+
 - name: Install Chrome
-  shell: |
-    axel -n {{ downloadThreads }} https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    dpkg -i google-chrome-stable_current_amd64.deb
+  shell: dpkg -i google-chrome-stable_current_amd64.deb
   become: yes
 
 - name: Install Chromium Stable

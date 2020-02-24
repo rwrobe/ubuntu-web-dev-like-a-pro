@@ -1,5 +1,5 @@
 ---
-- name: ensure system general packages are installed
+- name: Install LibreOffice
   apt: pkg="{{ item }}" state=latest
   with_items:
     - libreoffice
