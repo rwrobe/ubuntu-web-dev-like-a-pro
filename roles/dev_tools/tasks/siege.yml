@@ -2,7 +2,7 @@
 - name: Install Siege
   get_url:
     url: http://download.joedog.org/siege/siege-latest.tar.gz
-    path: "{{ installDir }}"
+    dest: "{{ installDir }}"
 
 - name: Configure and build Siege
   shell: |
