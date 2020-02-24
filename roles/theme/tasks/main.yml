@@ -3,11 +3,11 @@
   apt_repository: repo="{{ item }}" update_cache=yes
   with_items:
     - ppa:numix/ppa
-  sudo: yes
+  become: yes
 
 - name: Update caches after PPA being added
   apt: update_cache=yes
-  sudo: yes
+  become: yes
 
 - name: Clone Powerline fonts
   git: repo=https://github.com/powerline/fonts.git dest={{ downloadDir }}/powerline-fonts
@@ -23,7 +23,7 @@
     - numix-gtk-theme
     - numix-icon-theme-circle
     - numix-icon-theme-square
-  sudo: yes
+  become: yes
 
 - name: Set Gtk Theme
   shell: sudo -iu {{ ansible_user }} gsettings set org.gnome.desktop.interface gtk-theme "Zukitwo"

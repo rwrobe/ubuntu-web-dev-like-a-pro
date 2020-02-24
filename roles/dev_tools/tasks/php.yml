@@ -1,7 +1,7 @@
 ---
 - name: Ensure Ondrej PHP repo added
   apt_repository: repo='ppa:ondrej/php' state=present update_cache=yes
-  sudo: yes
+  become: yes
 
 - name: Ensure PHP installed
   apt: pkg={{ item }} state=latest update_cache=yes
@@ -15,4 +15,4 @@
     - php-gd
     - php-xdebug
     - mysql-client
-  sudo: yes
+  become: yes

@@ -9,7 +9,7 @@
 
 - name: Move Composer to /usr/local/bin
   shell: creates="/usr/local/bin/composer" mv {{ downloadDir }}/composer.phar /usr/local/bin/composer
-  sudo: yes
+  become: yes
 
 - name: Make Composer executable
   shell: chmod +x /usr/local/bin/composer

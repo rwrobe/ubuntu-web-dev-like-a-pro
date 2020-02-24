@@ -1,17 +1,7 @@
 ---
 - name: update APT cache
   apt: update_cache=yes
-  sudo: yes
-
-- name: upgrade dist
-  apt: upgrade=dist
-  sudo: yes
-
-- name: locale magic
-  shell: |
-    locale-gen en_US.UTF-8
-    export LANG=en_US.UTF-8
-  sudo: yes
+  become: yes
 
 - name: create directories
   file: path="{{ item }}" state=directory

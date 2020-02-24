@@ -5,7 +5,7 @@
     - libreoffice
     - libreoffice-writer
     - libreoffice-calc
-  sudo: yes
+  become: yes
 
 - name: Install InSync
   shell: |

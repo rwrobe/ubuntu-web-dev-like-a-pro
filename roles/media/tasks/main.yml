@@ -1,4 +1,4 @@
 ---
 - name: Install Spotify
   shell: snap install spotify
-  sudo: yes
+  become: yes

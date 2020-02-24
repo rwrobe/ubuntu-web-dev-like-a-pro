@@ -39,10 +39,10 @@
     - apt-transport-https
     - lsb-release
     - gnupg
-  sudo: yes
+  become: yes
 
 - name: Update caches after PPA being added
   apt: update_cache=yes
-  sudo: yes
+  become: yes
 
 - include: zsh.yml
