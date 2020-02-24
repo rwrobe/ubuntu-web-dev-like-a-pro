@@ -1,20 +1,26 @@
 ---
 - name: Install prerequisites
-  apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg2' ,'software-properties-common']
-    update_cache: yes
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - apt-transport-https
+    - gnupg2
+  update_cache: yes
+  become: yes
 
 - name: Add Docker GPG key
   apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+  become: yes
 
 - name: Add Docker APT repository
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/{{docker_distribution_string|lower}} {{docker_distribution_release|lower}} stable
+  become: yes
 
 - name: Install Docker
   apt:
     name: docker-ce
     update_cache: yes
+  become: yes
 
 - name: Add Docker group
   shell: |
@@ -23,9 +29,12 @@
   become: yes
 
 - name: Install prerequisites
-  apt:
-    name: ['python3-pip', 'python3-setuptools', 'virtualenv']
-    update_cache: yes
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - python3-pip
+    - python3-setuptools
+    - virtualenv
+  become: yes
 
 - name: Install docker-compose
   shell: |
