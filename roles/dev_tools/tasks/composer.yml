@@ -1,7 +1,8 @@
 ---
 - name: Check if Composer is installed.
-  stat: "path=$(which composer)"
+  command: "which composer"
   register: composer_bin
+  ignore_errors: yes
 
 - name: Get Composer installer signature.
   uri:
