@@ -24,7 +24,9 @@
   when: not composer_bin
 
 - name: Move Composer to /usr/local/bin
-  shell: creates="/usr/local/bin/composer" mv {{ downloadDir }}/composer.phar /usr/local/bin/composer
+  shell: |
+    mv {{ downloadDir }}/composer.phar /usr/local/bin/composer
+    chmod +x /usr/local/bin/composer
   become: yes
   when: not composer_bin
 
