@@ -1,0 +1,15 @@
+---
+- name: Install Siege
+  get_url:
+    url: http://download.joedog.org/siege/siege-latest.tar.gz
+    path: {{ installDir }}
+
+- name: Configure and build Siege
+  shell: |
+    cd {{ installDir }}
+    ./configure
+    make
+
+- name: Install Siege
+  shell: make install
+  become: yes

@@ -27,4 +27,6 @@
 
 - include: eb.yml
 
+- include: siege.yml
+
 # Todo: Postman, Dock Station
