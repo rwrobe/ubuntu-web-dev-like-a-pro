@@ -15,6 +15,7 @@
 
 - name: Install Oh-My-ZSH
   shell: sh -c {{ downloadDir }}/install.sh
+  become: yes
   when: stat_result.stat.exists == False
 
 - name: Change theme for user
@@ -25,8 +26,7 @@
 
 - name: Change default shell for user
   shell: chsh {{ ansible_user }} -s $(which zsh)
-  ignore_errors: yes
 
 - name: Change default shell for root
   shell: chsh root -s $(which zsh)
-  ignore_errors: yes
+  become: yes

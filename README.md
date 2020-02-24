@@ -12,8 +12,8 @@ This fork of [Ubuntu Webdev like a Pro](https://github.com/iJackUA/ubuntu-web-de
 * `curl -s https://raw.githubusercontent.com/iJackUA/ubuntu-web-dev-like-a-pro/master/run.sh | bash /dev/stdin prepare`
 * **Check the `main.yml` file to see what will be installed. Check/modify version numbers and included roles**
 * **Check the `roles/web_dev_essential/var.yml` file to verify what distribution of Docker CE to install**
-* `sudo ./run.sh prepare {your_username}` to install Ansible and Git and create the Ansible host entries
-* `sudo ./run.sh install` to begin installation
+* `sudo ./run.sh prepare {your_username}` to install Ansible and Git and create the Ansible host entries (which is why you're su in this step).
+* `./run.sh install` to begin installation
 
 ## Notice! Nothing is guaranteed! Use it on your own risk! 
 
