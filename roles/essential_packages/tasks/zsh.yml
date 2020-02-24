@@ -12,13 +12,11 @@
   get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: "{{ downloadDir }}"
+    mode: a+x
 
 - name: Install Oh-My-ZSH
-  shell: |
-    chmod +x {{ downloadDir }}/install.sh
-    sh -c {{ downloadDir }}/install.sh
+  shell: sh -c {{ downloadDir }}/install.sh
   when: stat_result.stat.exists == False
-  become: yes
 
 - name: Change default shell for user
   shell: chsh {{ ansible_user }} -s $(which zsh)
