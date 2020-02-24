@@ -9,7 +9,7 @@
     url: https://composer.github.io/installer.sig
     return_content: true
   register: composer_installer_signature
-  when: not composer_bin.stat.exists
+  when: not composer_bin
 
 - name: Download Composer
   get_url:
@@ -17,25 +17,25 @@
     dest: "{{ downloadDir }}"
     mode: a+x
     checksum: "sha384:{{ composer_installer_signature.content }}"
-  when: not composer_bin.stat.exists
+  when: not composer_bin
 
 - name: Run Composer installer.
   shell: |
     {{ php_executable }} composer-installer.php {% if composer_version %} --version={{ composer_version }}{% endif %}
     chdir={{ downloadDir }}
-  when: not composer_bin.stat.exists
+  when: not composer_bin
 
 - name: Move Composer to /usr/local/bin
   shell: creates="/usr/local/bin/composer" mv {{ downloadDir }}/composer.phar /usr/local/bin/composer
   become: yes
-  when: not composer_bin.stat.exists
+  when: not composer_bin
 
-- name: Update Composer to latest version (if configured).
+- name: Update Composer to Latest Version
   command: >
     {{ php_executable }} {{ composer_path }} self-update
   register: composer_update
 
-- name: Add GitHub OAuth token for Composer (if configured).
+- name: Add GitHub OAuth Token for Composer (if configured)
   become: true
   become_user: "{{ ansible_user }}"
   template:
