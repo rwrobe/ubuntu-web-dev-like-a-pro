@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FOLDER=$PWD
-ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass"
+ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-become-pass"
 
 provistext="
 ======================================================================
