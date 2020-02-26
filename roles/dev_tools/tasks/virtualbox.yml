@@ -1,6 +1,6 @@
 ---
 - name: Add VirtualBox Repo
-  apt-repository:
+  apt_repository:
     repo: deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian bionic contrib
   become: yes
 

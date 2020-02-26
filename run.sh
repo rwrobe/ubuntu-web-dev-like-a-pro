@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+FOLDER=$PWD
 ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass"
 
 provistext="
@@ -25,6 +25,7 @@ echo $warningtext
 case "$1" in
         prepare)
             echo "Install Ansbile"
+            sudo apt-add-repository --yes --update ppa:ansible/ansible
             sudo apt update -y
             sudo apt install ansible -y
             echo "Install GIT"

@@ -15,4 +15,4 @@
       - browser
       - productivity
       - dev_tools
-      - media
+      - media Requires Ansible > 2.8
