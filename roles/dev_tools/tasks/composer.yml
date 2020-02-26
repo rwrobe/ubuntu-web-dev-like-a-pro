@@ -4,23 +4,12 @@
   register: composer_bin
   ignore_errors: yes
 
-- name: Get Composer installer signature.
-  uri:
-    url: https://composer.github.io/installer.sig
-    return_content: true
-  register: composer_installer_signature
-  when: not composer_bin
-
-- name: Download Composer
-  get_url:
-    url: https://getcomposer.org/installer
-    dest: "{{ downloadDir }}/composer-setup.php"
-    mode: a+x
-    checksum: "sha384:{{ composer_installer_signature.content }}"
-  when: not composer_bin
-
-- name: Run Composer installer.
-  shell: php {{downloadDir}}/composer-setup.php
+- name: Install Composer
+  shell: |
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    php composer-setup.php
+    php -r "unlink('composer-setup.php');"
   when: not composer_bin
 
 - name: Move Composer to /usr/local/bin
@@ -31,16 +20,7 @@
   when: not composer_bin
 
 - name: Update Composer to Latest Version
-  shell: /usr/local/bin/composer
-
-- name: Add GitHub OAuth Token for Composer (if configured)
-  become: true
-  become_user: "{{ ansible_user }}"
-  template:
-    src: "auth.json.j2"
-    dest: "~.composer/auth.json"
-    owner: "{{ ansible_user }}"
-  when: githubOauthToken | length > 0
+  shell: composer self-update
 
 - name: Install Composer Packages
   shell: "composer global require {{ item }}"

@@ -22,7 +22,7 @@
     update_cache: yes
   become: yes
 
-- name: Add Docker group
+- name: Add Docker Group
   shell: |
     usermod -aG docker $USER
     newgrp docker
@@ -47,3 +47,8 @@
 - name: Fix vm.max_map_count issue with ElasticSearch containers
   shell: sysctl -w vm.max_map_count=262144
   become: yes
+
+- name: Stop and Disable Apache2
+  shell: |
+    sudo service apache2 stop
+    sudo update-rc.d apache2 disable

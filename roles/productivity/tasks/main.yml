@@ -22,3 +22,5 @@
   apt:
     name: insync
   become: yes
+
+# Todo: Mailspring, Minetime

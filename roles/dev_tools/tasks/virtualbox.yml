@@ -1,0 +1,15 @@
+---
+- name: Add VirtualBox Repo
+  apt-repository:
+    repo: deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian bionic contrib
+  become: yes
+
+- name: Add VirtualBox GPG key
+  apt_key: url=https://www.virtualbox.org/download/oracle_vbox_2016.asc
+  become: yes
+
+- name: Install VirtualBox
+  apt:
+    name: virtualbox-6.1
+    update_cache: yes
+  become: yes

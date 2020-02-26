@@ -7,7 +7,9 @@
 - name: Configure and build Siege
   shell: |
     cd {{ installDir }}
-    tar -xzf siege-latest.tar.gz
+    mkdir siege
+    tar -xzf siege-latest.tar.gz -C siege
+    cd siege/*
     ./configure
     make
 

@@ -14,6 +14,7 @@
     - php-curl
     - php-gd
     - php-xdebug
+    - php-mbstring
     - mysql-client
   become: yes
 

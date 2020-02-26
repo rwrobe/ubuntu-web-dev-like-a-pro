@@ -13,10 +13,10 @@
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion ' >> ~/.zshrc
 
-- name: Install Node latest
-  shell: |
-    source ~/.zshrc
-    nvm install stable
+#- name: Install Node latest
+#  shell: |
+#    source ~/.zshrc
+#    nvm install stable
 
 - name: Install Task Runners
   shell: "npm install -g {{ item }}"

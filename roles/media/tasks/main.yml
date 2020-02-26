@@ -1,4 +1,5 @@
 ---
 - name: Install Spotify
-  shell: snap install spotify
+  snap:
+    name: spotify
   become: yes

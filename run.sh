@@ -1,5 +1,6 @@
 #!/bin/bash
-FOLDER="$HOME/zorin-webdev-starter-kit"
+
+FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ANSIBLE_COMMAND="ansible-playbook $FOLDER/main.yml --ask-sudo-pass"
 
 provistext="

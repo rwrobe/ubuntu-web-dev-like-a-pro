@@ -11,12 +11,17 @@
   shell: |
     cd {{ installDir }}
     curl -s https://github.com/ahmetb/kubectx.git
+    cd kubectx
     chmod +x kubectx
     chomd +x kubens
-    ln -s ./kubectx /usr/local/bin/kubectx
-    ln -s ./kubens /usr/local/bin/kubens
+    mv kubectx /usr/local/bin/
+    mv kubens /usr/local/bin/
+  become: yes
+
+- name: Add Completions
+  shell: |
+    cd {{ installDir }}/kubectx
     mkdir -p ~/.oh-my-zsh/completions
     chmod -R 755 ~/.oh-my-zsh/completions
-    ln -s /opt/kubectx/completion/kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
-    ln -s /opt/kubectx/completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
-  become: yes
+    ln -s ./completion/kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
+    ln -s ./completion/kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
